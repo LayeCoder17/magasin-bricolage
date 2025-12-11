@@ -37,6 +37,10 @@ return new class extends Migration
             // Devise (par défaut XOF)
             $table->string('devise', 3)->default('XOF');
 
+            // Image de la variante (si différente du produit parent)
+            // ex. "products/perceuse-bosch-rouge.jpg"
+            $table->string('image_path')->nullable();
+
             // Attributs concrets de cette variante (JSON)
             // ex. {"tension":"220V","coffret":"avec","couleur":"Rouge"}
             $table->json('attributs')->nullable();
@@ -59,3 +63,4 @@ return new class extends Migration
         Schema::dropIfExists('variantes_produit');
     }
 };
+

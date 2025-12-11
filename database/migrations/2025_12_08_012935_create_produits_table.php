@@ -23,7 +23,7 @@ return new class extends Migration
             // Nom du produit (ex. "Perceuse Bosch GSB 13 RE")
             $table->string('nom');
 
-            // Code/slug unique pour l’URL (ex. "perceuse-bosch-gsb-13-re")
+            // Code/slug unique pour l'URL (ex. "perceuse-bosch-gsb-13-re")
             $table->string('code')->unique();
 
             // Code racine commun aux variantes (ex. "GSB13RE")
@@ -31,6 +31,10 @@ return new class extends Migration
 
             // Description détaillée du produit
             $table->text('description')->nullable();
+
+            // Image du produit (chemin local ou URL)
+            // ex. "products/perceuse-bosch.jpg" ou "https://..."
+            $table->string('image_path')->nullable();
 
             // Schéma des attributs possibles (taille, couleur…) pour ce produit
             $table->json('schema_attributs')->nullable();
@@ -50,4 +54,5 @@ return new class extends Migration
         Schema::dropIfExists('produits');
     }
 };
+
 

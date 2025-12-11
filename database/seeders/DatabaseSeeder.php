@@ -15,20 +15,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1) Créer les rôles de base
+        // 1) Rôles + utilisateur de test
         $this->call(RoleSeeder::class);
 
-        // 2) Créer un utilisateur de test (optionnel)
         $user = User::factory()->create([
             'name'  => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        // 3) Donner le rôle "admin" à cet utilisateur de test
         $roleAdmin = \App\Models\Role::where('code', 'admin')->first();
         if ($roleAdmin) {
             $user->roles()->attach($roleAdmin->id);
         }
+
+        // 2) Données métier quincaillerie / magasin-bricolage
+        $this->call([
+            CategorieSeeder::class,
+            BoutiqueSeeder::class,
+            ProduitSeeder::class,
+            ProduitVariantSeeder::class,
+            StockSeeder::class,
+        ]);
     }
 }
+
+
 
